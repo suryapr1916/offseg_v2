@@ -37,10 +37,7 @@ def init_wandb(config):
     wandb.init()
     return WandbLogger(project=config.project_name)
 
-def init_train(config, logger = None):
-    if not logger:
-        logger = init_wandb(config)
-
+def init_train(config, logger = init_wandb()):
     trainer = Trainer(logger=logger,
                 callbacks = [EarlyStopping(monitor="val_loss", mode="min", patience = 5)],
                 max_epochs=config.max_epochs,
