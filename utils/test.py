@@ -28,12 +28,19 @@ def init_test(checkpoint_path, test_dataloader):
             y_pred = model(x)
             
             print("Loss: ", F.mse_loss(y_pred, y))
+            
             print("Original image:")
             # use pillow to show the image
-            print(y.view(-1, 550, 688, 3)[0].cpu().numpy().shape)
-            print(y_pred.view(-1, 550, 688, 3)[0].cpu().detach().numpy().shape)
-            Image.fromarray(y.view(550, 688, 3,-1)[0].cpu().numpy()).show()
+            print(x.view(-1, 550, 688, 3)[0].cpu().numpy().shape)
+            Image.fromarray(x.view(550, 688, 3,-1)[0].cpu().numpy()).show()
+            
             print("K Means image:")
+            print(y_pred.view(-1, 550, 688, 3)[0].cpu().detach().numpy().shape)
             Image.fromarray(y_pred.view(550, 688, 3,-1)[0].cpu().numpy()).show()
-    
+            
+            
+            print("Reconstructed image:")
+            print(y.view(-1, 550, 688, 3)[0].cpu().detach().numpy().shape)
+            Image.fromarray(y.view(550, 688, 3,-1)[0].cpu().numpy()).show()
+            
     return None
