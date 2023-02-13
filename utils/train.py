@@ -10,11 +10,12 @@ import wandb
 def get_transforms():
     data_transform = transforms.Compose([
     transforms.ToTensor(),
-    transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
+    transforms.Normalize((0., 0., 0.), (255, 255., 255.))
     ])
 
     label_transform = transforms.Compose([
     transforms.ToTensor(),
+    transforms.Normalize((0., 0., 0.), (255., 255., 225.))
     ])
     return [data_transform, label_transform]
 
@@ -25,9 +26,11 @@ def create_dataset(config):
 
 def get_dataloaders(config):
     train_dataset = create_dataset(config)
-    train, test = random_split(train_dataset, [0, 1])
+    total_count = train_dataset.__len__()
+    train, test = random_split(train_dataset,
+                 [int(total_count*config.train_split), total_count - int(total_count*config.train_split)])
     train_dataloader = torch.utils.data.DataLoader(train, batch_size=config.batch_size, shuffle=True)
-    test_dataloader = torch.utils.data.DataLoader(test, batch_size=config.batch_size, shuffle=False)
+    test_dataloader = torch.utils.data.DataLoader(test, batch_size=config.batch_size, shuffle=True)
     return train_dataloader, test_dataloader
 
 def finish_wandb():

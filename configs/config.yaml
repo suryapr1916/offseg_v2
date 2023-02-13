@@ -1,14 +1,15 @@
-config.project_name: 'offseg'
+project_name: 'offseg'
 
 # paths
-INPUT_DIR : 'C:\Users\ragav\Code\offseg\data\hp'
-OUTPUT_DIR: 'C:\Users\ragav\Code\offseg\data\hp_mask'
+INPUT_DIR : 'C:\Users\ragav\Code\offseg_v2\cleaned\hp'
+OUTPUT_DIR: 'C:\Users\ragav\Code\offseg_v2\cleaned\hp_mask'
 CKPT_DIR : 'C:\Users\ragav\Code\offseg\checkpoints'
 
 # hyperparameters
 batch_size: 32
-config.max_epochs: 100
+max_epochs: 100
+train_split: 0.2
 
 # change to 'gpu' and 'cuda' if you have a gpu
-config.accelerator: 'cpu'
-config.device: 'cpu'
+accelerator: 'cpu'
+device: 'cpu'

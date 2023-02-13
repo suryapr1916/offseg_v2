@@ -28,9 +28,8 @@ def test(cfg: DictConfig):
     # get data loaders after preprocessing
     _, val_dataloader = get_dataloaders(cfg)
     
-    init_test(r'C:\Users\ragav\Code\offseg_v2\epoch=8-step=819.ckpt', val_dataloader)    
+    init_test(r'C:\Users\ragav\Code\offseg_v2\checkpoints\checkpoint1.ckpt', val_dataloader)    
 
 if __name__ == '__main__':
-    # run()
-
-    test()
+    run()
+    # test()

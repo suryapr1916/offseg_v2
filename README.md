@@ -11,3 +11,6 @@
 - The loss has not been mentioned in the config file and has to be changed in the model class
 
 - Make sure to add the 'data' folder in the root directory, refer to paths in config file
+
+- it is important to make sure that splitting file paths should be correct with '/' or '\' depending on the OS
+

@@ -2,6 +2,7 @@ from torch import nn, exp, randn_like
 from torch.nn import functional as F
 from torch.optim import Adam
 import pytorch_lightning as pl
+from utils import tensor_to_image
 
 class CONVAE(pl.LightningModule):
 
