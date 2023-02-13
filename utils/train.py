@@ -25,7 +25,7 @@ def create_dataset(config):
 
 def get_dataloaders(config):
     train_dataset = create_dataset(config)
-    train, test = random_split(train_dataset, [2897, 1242])
+    train, test = random_split(train_dataset, [0, 1])
     train_dataloader = torch.utils.data.DataLoader(train, batch_size=config.batch_size, shuffle=True)
     test_dataloader = torch.utils.data.DataLoader(test, batch_size=config.batch_size, shuffle=False)
     return train_dataloader, test_dataloader
@@ -37,7 +37,10 @@ def init_wandb(config):
     wandb.init()
     return WandbLogger(project=config.project_name)
 
-def init_train(config, logger = init_wandb()):
+def init_train(config, logger = None):
+    if not logger:
+        logger = init_wandb(config)
+
     trainer = Trainer(logger=logger,
                 callbacks = [EarlyStopping(monitor="val_loss", mode="min", patience = 5)],
                 max_epochs=config.max_epochs,
